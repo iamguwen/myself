@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+<bean name="userService" class="com.service.Imp.UserServiceImp"/>
+<bean name="log" class="com.log.Log"/>
+<bean name="afterLog" class="com.log.AfterLog"/>
+<aop:config >
+	<aop:pointcut expression="execution(* com.service.Imp.UserServiceImp.add())" id="pointcut"/>
+	
+<!-- <aop:pointcut expression="execution(* com.service.Imp.*.*(..))" id="pointcut"/> 所有类的所有方法且参数随意-->
+	<!-- 固定用法，用*表示返回值，后边是类，在后边是调用的方法 -->
+	<aop:advisor advice-ref="log" pointcut-ref="pointcut"/>
+	<aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"/>
+	<!-- 将公告业务与执行点联系起来 -->
+</aop:config>
+
+</beans>
