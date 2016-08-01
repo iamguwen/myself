@@ -1,0 +1,15 @@
+if (button.getText().toString().equals("OK")) {
+                    Toast.makeText(MainActivity.this, "随机数：" + target, Toast.LENGTH_SHORT).show();
+                    if (input.getText().toString().equals(""))
+                        return;
+                    int tmp = Integer.parseInt(input.getText().toString());
+                    if (tmp == target) {
+                        info.setText("恭喜您，猜对了！");
+                        button.setText("再来一次");
+                    } else if (tmp < target)
+                        info.setText("猜小了，请重试:");
+                    else
+                        info.setText("猜大了，请重试:");
+                } else {
+                    newGame();
+                }
